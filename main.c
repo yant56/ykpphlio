@@ -15,6 +15,8 @@ void *philo_check(void *arg)
 			if (get_time() - data->philo[i].last_meal_time > data->time_to_die)
 			{
 				someone_died(data, i);// eğer birisi öldüyse
+				printf("bab öldü\n");
+				data->end = 1;
 				return (NULL);
 			}
 			if (all_eaten(data)) // Eğer tüm filozoflar yemeğini yediyse
@@ -34,21 +36,27 @@ void philo_life(t_philo *philo)
 	
 	while (1)
 	{
-		if (philo->data->end)
+		if(philo->data->end)
+		{
+			printf("baba2 öldü\n");
 			break;
+		}
+			
 
 		if (philo->data->times_must_eat != -1 && philo->times_eaten >= philo->data->times_must_eat)
 		{
 			philo->finished = 1;
 			break;
 		}
-	
-		take_forks(philo);
-		eat(philo);
+
+		take_forks_end_eat(philo);
+		//eat(philo);
 		clean_forks(philo);
 		philo_sleep(philo);
+		 if (philo->data->end || all_eaten(philo->data))
+		return;	
 		pthread_mutex_lock(&philo->data->print_mutex);
-		printf("%ld %d  %s\n", get_time() - philo->data->start_time,philo->philo_id + 1,THINK);
+	printf("%ld %d  %s\n", get_time() - philo->data->start_time,philo->philo_id + 1,THINK);
 		pthread_mutex_unlock(&philo->data->print_mutex);
 	}
 
@@ -67,14 +75,6 @@ void *philo_line(void *arg)
     if (philo->philo_id % 2 == 1)
 	{
 		 usleep(30);
-
-		 if(philo->data->count_philo % 2 == 1)
-		 {
-			 if(philo->philo_id == philo->data->count_philo - 1)
-			 {
-				 usleep(100);
-			 }
-		 }
 	}
        philo_life(philo);
 

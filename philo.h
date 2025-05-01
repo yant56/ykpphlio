@@ -48,7 +48,7 @@ void monitor_print(int flag, long time, int philo_id,
 void clear_malloc(t_data *data);
 void one_philo(t_data *data);
 void clean_forks(t_philo *philo);
-void take_forks(t_philo *philo);
+void take_forks_end_eat(t_philo *philo);
 void philo_sleep(t_philo *philo);
 void eat(t_philo *philo);
 int all_eaten(t_data *data);

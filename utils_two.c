@@ -64,7 +64,7 @@ void someone_died(t_data *data, int i)
 {
 	pthread_mutex_lock(&data->print_mutex);
 	//monitor_print(1, get_time(), i, data);
-	printf("%ld %d  %s\n", get_time() - data->start_time,data->philo->philo_id + 1,DIE);
-	data->end = 1;
+	//printf("%ld %d  %s\n", get_time() - data->start_time,data->philo->philo_id + 1,DIE);
+	printf("%ld %d  %s\n", get_time() - data->start_time, i + 1, DIE);
 	pthread_mutex_unlock(&data->print_mutex);
 }
