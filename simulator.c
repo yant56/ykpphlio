@@ -13,7 +13,6 @@ void take_forks(t_philo *philo)
 
     pthread_mutex_lock(&philo->data->forks[left_fork]);
     pthread_mutex_lock(&philo->data->print_mutex);
-   // monitor_print(3, get_time(), philo->philo_id, philo->data);
      printf("%ld %d  %s\n", get_time() - philo->data->start_time,philo->philo_id + 1,FORK);
     pthread_mutex_unlock(&philo->data->print_mutex);
  
@@ -21,7 +20,6 @@ void take_forks(t_philo *philo)
 
     pthread_mutex_lock(&philo->data->forks[right_fork]);
     pthread_mutex_lock(&philo->data->print_mutex);
-    //monitor_print(3, get_time(), philo->philo_id, philo->data);
     printf("%ld %d  %s\n", get_time() - philo->data->start_time,philo->philo_id + 1,FORK);
     pthread_mutex_unlock(&philo->data->print_mutex);
 }
@@ -29,7 +27,6 @@ void take_forks(t_philo *philo)
 void philo_sleep(t_philo *philo)
 {
     pthread_mutex_lock(&philo->data->print_mutex);
-   // monitor_print(4, get_time(), philo->philo_id, philo->data);
     printf("%ld %d  %s\n", get_time() - philo->data->start_time,philo->philo_id + 1,SLEEP);
     pthread_mutex_unlock(&philo->data->print_mutex);
 
@@ -39,7 +36,6 @@ void philo_sleep(t_philo *philo)
 void eat(t_philo *philo)
 {
     pthread_mutex_lock(&philo->data->print_mutex);
-    //monitor_print(5, get_time(), philo->philo_id, philo->data);
      printf("%ld %d  %s\n", get_time() - philo->data->start_time,philo->philo_id + 1,EAT);
     pthread_mutex_unlock(&philo->data->print_mutex);
 

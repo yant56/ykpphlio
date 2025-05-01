@@ -17,34 +17,12 @@ void set_values(t_data *data)
 	}
 	data->end = 0;
 	data->start_time = get_time();
-	//pthread_mutex_init(data->print_mutex, NULL);
 }
 
 void monitor_print(int flag, long time, int philo_id, t_data *data)
 {
 	if (data->end || all_eaten(data))
 		return;
-	if (flag == 1)
-	{
-		printf("%ld %d  %s\n", time - data->start_time,
-			   philo_id + 1,DIE);
-	}
-	else if (flag == 2)
-	{
-		printf("%ld %d %s\n", time - data->start_time, philo_id + 1,THINK);
-	}
-	else if (flag == 3)
-	{
-		printf("%ld %d  %s\n", time - data->start_time, philo_id + 1,FORK);
-	}
-	else if (flag == 4)
-	{
-		printf("%ld %d %s\n", time - data->start_time, philo_id + 1,SLEEP);
-	}
-	else if (flag == 5)
-	{
-		printf("%ld %d  %s\n", time - data->start_time, philo_id + 1,EAT);
-	}
 }
 
 void clear_malloc(t_data *data)

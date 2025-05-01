@@ -27,14 +27,13 @@ typedef struct s_philo
 
 typedef struct s_data
 {
-	long start_time;// bu kısma bak 
+	long start_time;
 	int count_philo;
 	int time_to_die;
 	int time_to_eat;
 	int time_to_sleep;
 	int times_must_eat;
-	//int philo_number; // bak
-	int end; // bak 
+	int end; 
 	pthread_mutex_t *forks;
 	pthread_mutex_t print_mutex;
 	t_philo *philo;

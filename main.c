@@ -48,7 +48,6 @@ void philo_life(t_philo *philo)
 		clean_forks(philo);
 		philo_sleep(philo);
 		pthread_mutex_lock(&philo->data->print_mutex);
-		//monitor_print(2, get_time(), philo->philo_id, philo->data);
 		printf("%ld %d  %s\n", get_time() - philo->data->start_time,philo->philo_id + 1,THINK);
 		pthread_mutex_unlock(&philo->data->print_mutex);
 	}
