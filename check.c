@@ -35,7 +35,9 @@ static int check_digit(int argc,char **argv)
 
 int control_values(int argc , char **argv)
 {
-    int i  =0;
+    int i;
+	
+	i = 0;
 	if (argc < 5 || argc > 6)
 		return 1;
 	if (argc == 6 && ft_atoi(argv[5]) <= 0)
