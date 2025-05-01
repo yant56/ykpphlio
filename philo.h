@@ -1,0 +1,67 @@
+#ifndef PHILO_H
+#define PHILO_H
+
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/time.h>
+#include <unistd.h>
+
+
+# define FORK "has taken a fork"
+# define THINK "is thinking"
+# define SLEEP "is sleeping"
+# define EAT "is eating"
+# define DIE "died"
+
+
+typedef struct s_philo
+{
+	int philo_id;
+	int times_eaten;
+	int finished;
+	long last_meal_time;
+	pthread_t thread;
+	struct s_data *data;
+} t_philo;
+
+typedef struct s_data
+{
+	long start_time;// bu kısma bak 
+	int count_philo;
+	int time_to_die;
+	int time_to_eat;
+	int time_to_sleep;
+	int times_must_eat;
+	//int philo_number; // bak
+	int end; // bak 
+	pthread_mutex_t *forks;
+	pthread_mutex_t print_mutex;
+	t_philo *philo;
+} t_data;
+
+int control_values(int argc, char **argv);
+int ft_atoi(const char *str);
+void set_values(t_data *data);
+void monitor_print(int flag, long time, int philo_id,
+				  t_data *data);
+void clear_malloc(t_data *data);
+void one_philo(t_data *data);
+void clean_forks(t_philo *philo);
+void take_forks(t_philo *philo);
+void philo_sleep(t_philo *philo);
+void eat(t_philo *philo);
+int all_eaten(t_data *data);
+void monitor_print(int flag, long time, int philo_id,
+				  t_data *data);
+long get_time(void);
+int p_simulator(t_data *data);
+void someone_died(t_data *data, int i);
+
+int ft_create_threads(t_data *data);
+int ft_join_threads(t_data *data);
+void take_values(int argc,char **argv, t_data *data);
+void *philo_line(void *arg);
+void *philo_check(void *arg);
+
+#endif
