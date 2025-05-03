@@ -20,7 +20,6 @@ typedef struct s_philo
 {
 	int philo_id;
 	int times_eaten;
-	int finished;
 	long last_meal_time;
 	pthread_t thread;
 	struct s_data *data;
@@ -43,8 +42,6 @@ typedef struct s_data
 int control_values(int argc, char **argv);
 int ft_atoi(const char *str);
 void set_values(t_data *data);
-void monitor_print(int flag, long time, int philo_id,
-				  t_data *data);
 void clear_malloc(t_data *data);
 void one_philo(t_data *data);
 void clean_forks(t_philo *philo);
@@ -52,8 +49,6 @@ void take_forks_end_eat(t_philo *philo);
 void philo_sleep(t_philo *philo);
 void eat(t_philo *philo);
 int all_eaten(t_data *data);
-void monitor_print(int flag, long time, int philo_id,
-				  t_data *data);
 long get_time(void);
 int p_simulator(t_data *data);
 void someone_died(t_data *data, int i);
