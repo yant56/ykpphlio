@@ -37,7 +37,7 @@ int ft_join_threads(t_data *data)
 
 
 
-long get_time(void)
+long long get_time(void)
 {
 	static struct timeval tv;
 

@@ -27,7 +27,7 @@ typedef struct s_philo
 
 typedef struct s_data
 {
-	long start_time;
+long long start_time;
 	int count_philo;
 	int time_to_die;
 	int time_to_eat;
@@ -48,7 +48,7 @@ void clean_forks(t_philo *philo);
 void take_forks_end_eat(t_philo *philo);
 void philo_sleep(t_philo *philo);
 int all_eaten(t_data *data);
-long get_time(void);
+long long get_time(void);
 int p_simulator(t_data *data);
 void someone_died(t_data *data, int i);
 int ft_create_threads(t_data *data);

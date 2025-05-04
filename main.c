@@ -47,7 +47,7 @@ void philo_life(t_philo *philo)
 		 if (philo->data->end || all_eaten(philo->data))
 		return;	
 		pthread_mutex_lock(&philo->data->print_mutex);
-	printf("%ld %d  %s\n", get_time() - philo->data->start_time,philo->philo_id + 1,THINK);
+	printf("%lld %d  %s\n", get_time() - philo->data->start_time,philo->philo_id + 1,THINK);
 		pthread_mutex_unlock(&philo->data->print_mutex);
 	}
 

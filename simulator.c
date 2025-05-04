@@ -9,7 +9,7 @@ void clean_forks(t_philo *philo)
 void ft_eat(t_philo *philo)
 {
 	 pthread_mutex_lock(&philo->data->print_mutex);
-     printf("%ld %d  %s\n", get_time() - philo->data->start_time,philo->philo_id + 1,EAT);
+     printf("%lld %d  %s\n", get_time() - philo->data->start_time,philo->philo_id + 1,EAT);
     pthread_mutex_unlock(&philo->data->print_mutex);
     philo->last_meal_time = get_time();
     philo->times_eaten++;
@@ -28,13 +28,13 @@ void take_forks_end_eat(t_philo *philo)
     if (philo->data->end || all_eaten(philo->data))
 		return;
     pthread_mutex_lock(&philo->data->print_mutex);
-     printf("%ld %d  %s\n", get_time() - philo->data->start_time,philo->philo_id + 1,FORK);
+     printf("%lld %d  %s\n", get_time() - philo->data->start_time,philo->philo_id + 1,FORK);
     pthread_mutex_unlock(&philo->data->print_mutex);
     pthread_mutex_lock(&philo->data->forks[right_fork]);
     if (philo->data->end || all_eaten(philo->data))
 		return;
     pthread_mutex_lock(&philo->data->print_mutex);
-    printf("%ld %d  %s\n", get_time() - philo->data->start_time,philo->philo_id + 1,FORK);
+    printf("%lld %d  %s\n", get_time() - philo->data->start_time,philo->philo_id + 1,FORK);
     pthread_mutex_unlock(&philo->data->print_mutex);
      if (philo->data->end || all_eaten(philo->data))
 		return;
@@ -46,7 +46,7 @@ void philo_sleep(t_philo *philo)
         if (philo->data->end || all_eaten(philo->data))
 		return;
     pthread_mutex_lock(&philo->data->print_mutex);
-    printf("%ld %d  %s\n", get_time() - philo->data->start_time,philo->philo_id + 1,SLEEP);
+    printf("%lld %d  %s\n", get_time() - philo->data->start_time,philo->philo_id + 1,SLEEP);
     pthread_mutex_unlock(&philo->data->print_mutex);
     usleep(philo->data->time_to_sleep * 1000);
 }
