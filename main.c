@@ -88,7 +88,7 @@ int ft_init(int argc, char *argv[], t_data *data)
 	if (!data->forks)
 	{
 		printf("Error\n");
-		return (free(data),1);
+		return (free(data),free(data->philo),1);
 	}
 	set_values(data);// philo değerlerini gir.
 	

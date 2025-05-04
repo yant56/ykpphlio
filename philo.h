@@ -47,12 +47,10 @@ void one_philo(t_data *data);
 void clean_forks(t_philo *philo);
 void take_forks_end_eat(t_philo *philo);
 void philo_sleep(t_philo *philo);
-void eat(t_philo *philo);
 int all_eaten(t_data *data);
 long get_time(void);
 int p_simulator(t_data *data);
 void someone_died(t_data *data, int i);
-
 int ft_create_threads(t_data *data);
 int ft_join_threads(t_data *data);
 void take_values(int argc,char **argv, t_data *data);

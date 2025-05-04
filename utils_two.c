@@ -24,27 +24,15 @@ void clear_malloc(t_data *data)
 {
 	int i;
 
-	i = 0;
-	while (i < data->count_philo)
-	{
+	i = -1;
+	while (++i < data->count_philo)
 		pthread_mutex_destroy(&data->forks[i]);
-		i++;
-	}
 	if (data->philo)
-	{
 		free(data->philo);
-		data->philo = NULL;
-	}
 	if (data->forks)
-	{
 		free(data->forks);
-		data->forks = NULL;
-	}
 	if (data)
-	{
 		free(data);
-		data = NULL;
-	}
 }
 
 void one_philo(t_data *data)

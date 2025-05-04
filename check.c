@@ -29,27 +29,6 @@ int ft_atoi(const char *str)
 	return (result * sign);
 }
 
-static int check_digit(int argc,char **argv)
-{
-	int i = 1;
-	int j = 0;
-    while (i < argc)
-	{
-		j = 0;
-		while (argv[i][j])
-		{
-			if (argv[i][j] < '0' || argv[i][j] > '9')
-				return 1;
-			j++;
-		}
-		i++;	
-	}
-	
-	if (ft_atoi(argv[1]) <= 0 || ft_atoi(argv[2]) < 60 || ft_atoi(argv[3]) < 60 || ft_atoi(argv[4]) < 60)
-		return 1;
-	return 0;
-}
-
  void take_values(int argc,char **argv, t_data *data)
 
 {
@@ -71,7 +50,8 @@ int control_values(int argc , char **argv)
 		return 1;
 	if (argc == 6 && ft_atoi(argv[5]) <= 0)
 		return 1;
-	if (check_digit(argc,argv))
+	if (ft_atoi(argv[1]) <= 0 || ft_atoi(argv[2]) < 60 || // çira şest dane ez nizanım. 
+	 ft_atoi(argv[3]) < 60 || ft_atoi(argv[4]) < 60)
 		return 1;
 	return 0;
 
