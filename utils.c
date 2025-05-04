@@ -1,14 +1,28 @@
-#include "philo.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yant <yant@student.42>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/05 01:30:20 by yant              #+#    #+#             */
+/*   Updated: 2025/05/05 02:03:11 by yant             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int ft_create_threads(t_data *data)
+#include "philo.h"
+#include <stdio.h>
+#include <sys/time.h>
+
+int	ft_create_threads(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->count_philo)
 	{
-		if (pthread_create(&data->philo[i].thread, NULL, philo_line,
-						   &data->philo[i]))
+		if (pthread_create(&data->philo[i].thread,
+				NULL, philo_line, &data->philo[i]))
 		{
 			printf("Error\n");
 			return (1);
@@ -18,9 +32,9 @@ int ft_create_threads(t_data *data)
 	return (0);
 }
 
-int ft_join_threads(t_data *data)
+int	ft_join_threads(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->count_philo)
@@ -35,20 +49,19 @@ int ft_join_threads(t_data *data)
 	return (0);
 }
 
-
-
-long long get_time(void)
+long long	get_time(void)
 {
-	static struct timeval tv;
+	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	return ((tv.tv_sec * (long)1000) + (tv.tv_usec / 1000));
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-int all_eaten(t_data *data)
+int	all_eaten(t_data *data)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (i < data->count_philo)
 	{
 		if (data->times_must_eat == -1)

@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yant <yant@student.42>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/05 01:30:01 by yant              #+#    #+#             */
+/*   Updated: 2025/05/05 02:10:32 by yant             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-int ft_atoi(const char *str)
+int	ft_atoi( char *str)
 {
-	int i;
-	int sign;
-	int result;
+	int	i;
+	int	sign;
+	int	result;
 
 	i = 0;
 	sign = 1;
@@ -18,7 +30,6 @@ int ft_atoi(const char *str)
 	}
 	else if (str[i] == '+')
 		i++;
-
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		if (!(str[i] >= '0' && str[i] <= '9'))
@@ -29,8 +40,7 @@ int ft_atoi(const char *str)
 	return (result * sign);
 }
 
- void take_values(int argc,char **argv, t_data *data)
-
+void	take_values(int argc, char **argv, t_data *data)
 {
 	data->count_philo = ft_atoi(argv[1]);
 	data->time_to_die = ft_atoi(argv[2]);
@@ -41,18 +51,17 @@ int ft_atoi(const char *str)
 		data->times_must_eat = ft_atoi(argv[5]);
 }
 
-int control_values(int argc , char **argv)
+int	control_values(int argc, char **argv)
 {
-    int i;
-	
+	int	i;
+
 	i = 0;
 	if (argc < 5 || argc > 6)
-		return 1;
+		return (1);
 	if (argc == 6 && ft_atoi(argv[5]) <= 0)
-		return 1;
-	if (ft_atoi(argv[1]) <= 0 || ft_atoi(argv[2]) < 60 || // çira şest dane ez nizanım. 
-	 ft_atoi(argv[3]) < 60 || ft_atoi(argv[4]) < 60)
-		return 1;
-	return 0;
-
+		return (1);
+	if (ft_atoi(argv[1]) <= 0 || ft_atoi(argv[2]) <= 0
+		|| ft_atoi(argv[3]) <= 0 || ft_atoi(argv[4]) <= 0)
+		return (1);
+	return (0);
 }

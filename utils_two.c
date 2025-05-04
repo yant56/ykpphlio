@@ -1,8 +1,23 @@
-#include "philo.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_two.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yant <yant@student.42>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/05 01:30:16 by yant              #+#    #+#             */
+/*   Updated: 2025/05/05 01:57:51 by yant             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void set_values(t_data *data)
+#include "philo.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+void	set_values(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < data->count_philo)
@@ -18,11 +33,9 @@ void set_values(t_data *data)
 	data->start_time = get_time();
 }
 
-
-
-void clear_malloc(t_data *data)
+void	clear_malloc(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < data->count_philo)
@@ -35,17 +48,17 @@ void clear_malloc(t_data *data)
 		free(data);
 }
 
-void one_philo(t_data *data)
+void	one_philo(t_data *data)
 {
-	printf("%lld %d has taken a fork\n", get_time() - data->start_time, 1);
+	printf("%lld %d %s\n", get_time() - data->start_time, 1, FORK);
 	usleep(data->time_to_die * 1000);
-	printf("%lld %d died\n", get_time() - data->start_time, 1);
+	printf("%lld %d %s\n", get_time() - data->start_time, 1, DIE);
 	clear_malloc(data);
 }
 
-void someone_died(t_data *data, int i)
+void	someone_died(t_data *data, int i)
 {
 	pthread_mutex_lock(&data->print_mutex);
-	printf("%lld %d  %s\n", get_time() - data->start_time, i + 1, DIE);
+	printf("%lld %d %s\n", get_time() - data->start_time, i + 1, DIE);
 	pthread_mutex_unlock(&data->print_mutex);
 }
