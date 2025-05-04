@@ -6,7 +6,7 @@
 /*   By: yant <yant@student.42>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 01:30:11 by yant              #+#    #+#             */
-/*   Updated: 2025/05/05 02:26:11 by yant             ###   ########.fr       */
+/*   Updated: 2025/05/05 02:32:27 by yant             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void		someone_died(t_data *data, int i);
 int			ft_create_threads(t_data *data);
 int			ft_join_threads(t_data *data);
 void		take_values(int argc, char **argv, t_data *data);
-void		philo_line(void *arg);
+void		*philo_line(void *arg);
 void		*philo_check(void *arg);
 
 #endif
