@@ -6,7 +6,7 @@
 /*   By: yant <yant@student.42>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 01:30:07 by yant              #+#    #+#             */
-/*   Updated: 2025/05/05 01:55:39 by yant             ###   ########.fr       */
+/*   Updated: 2025/05/05 02:26:26 by yant             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	*philo_check(void *arg)
 	return (NULL);
 }
 
-void	philo_life(t_philo *philo)
+static void	philo_life(t_philo *philo)
 {
 	while (1)
 	{
@@ -61,7 +61,7 @@ void	philo_life(t_philo *philo)
 	}
 }
 
-void	*philo_line(void *arg)
+void	philo_line(void *arg)
 {
 	t_philo	*philo;
 
@@ -69,10 +69,9 @@ void	*philo_line(void *arg)
 	if (philo->philo_id % 2 == 1)
 		usleep(30);
 	philo_life(philo);
-	return (NULL);
 }
 
-int	ft_init(int argc, char *argv[], t_data *data)
+static int	ft_init(int argc, char *argv[], t_data *data)
 {
 	take_values(argc, argv, data);
 	data->philo = malloc(sizeof(t_philo) * data->count_philo);
