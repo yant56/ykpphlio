@@ -6,7 +6,7 @@
 /*   By: yant <yant@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 01:30:11 by yant              #+#    #+#             */
-/*   Updated: 2025/05/05 18:38:20 by yant             ###   ########.fr       */
+/*   Updated: 2025/05/05 19:07:40 by yant             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_philo
 	int				philo_id;
 	int				times_eaten;
 	long			last_meal_time;
-	int				flag;
 	pthread_t		thread;
 	struct s_data	*data;
 }	t_philo;
