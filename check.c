@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yant <yant@student.42>                     +#+  +:+       +#+        */
+/*   By: yant <yant@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 01:30:01 by yant              #+#    #+#             */
-/*   Updated: 2025/05/05 02:10:32 by yant             ###   ########.fr       */
+/*   Updated: 2025/05/05 12:40:10 by yant             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_atoi( char *str)
+int	ft_atoi(char *str)
 {
 	int	i;
 	int	sign;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yant <yant@student.42>                     +#+  +:+       +#+        */
+/*   By: yant <yant@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 01:30:07 by yant              #+#    #+#             */
-/*   Updated: 2025/05/05 02:32:52 by yant             ###   ########.fr       */
+/*   Updated: 2025/05/05 19:02:09 by yant             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	philo_life(t_philo *philo)
 			&& philo->times_eaten >= philo->data->times_must_eat)
 			break;
 		take_forks_end_eat(philo);
-		clean_forks(philo);
+		//clean_forks(philo);
 		philo_sleep(philo);
 		if (philo->data->end || all_eaten(philo->data))
 			return;
@@ -67,7 +67,7 @@ void	*philo_line(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->philo_id % 2 == 1)
-		usleep(30);
+		ft_usleep(1);
 	philo_life(philo);
 	return(NULL);
 }

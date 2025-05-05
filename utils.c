@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yant <yant@student.42>                     +#+  +:+       +#+        */
+/*   By: yant <yant@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 01:30:20 by yant              #+#    #+#             */
-/*   Updated: 2025/05/05 02:03:11 by yant             ###   ########.fr       */
+/*   Updated: 2025/05/05 17:52:05 by yant             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 #include <stdio.h>
 #include <sys/time.h>
+#include <unistd.h>
+
 
 int	ft_create_threads(t_data *data)
 {
@@ -75,3 +77,13 @@ int	all_eaten(t_data *data)
 	}
 	return (1);
 }
+
+void	ft_usleep(long long time)
+{
+	long long	start;
+
+	start = get_time() + time;
+	while (get_time() <= start)
+		usleep(500);
+}
+
