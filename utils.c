@@ -6,7 +6,7 @@
 /*   By: yant <yant@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 01:30:20 by yant              #+#    #+#             */
-/*   Updated: 2025/05/05 17:52:05 by yant             ###   ########.fr       */
+/*   Updated: 2025/05/10 04:18:05 by yant             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <stdio.h>
 #include <sys/time.h>
 #include <unistd.h>
-
 
 int	ft_create_threads(t_data *data)
 {
@@ -70,7 +69,7 @@ int	all_eaten(t_data *data)
 			return (0);
 		else if (data->times_must_eat > 0)
 		{
-			if (data->philo[i].times_eaten < data->times_must_eat)
+			if (data->philo[i].count_eaten < data->times_must_eat)
 				return (0);
 		}
 		i++;
@@ -86,4 +85,3 @@ void	ft_usleep(long long time)
 	while (get_time() <= start)
 		usleep(500);
 }
-

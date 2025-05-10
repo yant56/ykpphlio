@@ -6,7 +6,7 @@
 /*   By: yant <yant@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 01:30:11 by yant              #+#    #+#             */
-/*   Updated: 2025/05/05 19:07:40 by yant             ###   ########.fr       */
+/*   Updated: 2025/05/10 04:17:05 by yant             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 typedef struct s_philo
 {
 	int				philo_id;
-	int				times_eaten;
+	int				count_eaten;
 	long			last_meal_time;
 	pthread_t		thread;
 	struct s_data	*data;
@@ -44,13 +44,6 @@ typedef struct s_data
 	t_philo			*philo;
 }	t_data;
 
-typedef struct s_mutex_clear
-{
-	pthread_mutex_t	clear;
-}t_mutex_clear;
-
-
-
 int			control_values(int argc, char **argv);
 int			ft_atoi(char *str);
 void		set_values(t_data *data);
@@ -68,6 +61,6 @@ int			ft_join_threads(t_data *data);
 void		take_values(int argc, char **argv, t_data *data);
 void		*philo_line(void *arg);
 void		*philo_check(void *arg);
-void	ft_usleep(long long time);
+void		ft_usleep(long long time);
 
 #endif

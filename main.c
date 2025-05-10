@@ -6,7 +6,7 @@
 /*   By: yant <yant@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 01:30:07 by yant              #+#    #+#             */
-/*   Updated: 2025/05/05 19:02:09 by yant             ###   ########.fr       */
+/*   Updated: 2025/05/10 04:17:21 by yant             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	*philo_check(void *arg)
 		i = -1;
 		while (++i < data->count_philo)
 		{
-			if (get_time() - data->philo[i].last_meal_time > data->time_to_die)
+			if (get_time() - data->philo[i].last_meal_time
+				> data->time_to_die)
 			{
 				someone_died(data, i);
 				data->end = 1;
@@ -47,13 +48,12 @@ static void	philo_life(t_philo *philo)
 	while (1)
 	{
 		if (philo->data->end && philo->data->times_must_eat != -1
-			&& philo->times_eaten >= philo->data->times_must_eat)
-			break;
+			&& philo->count_eaten >= philo->data->times_must_eat)
+			break ;
 		take_forks_end_eat(philo);
-		//clean_forks(philo);
 		philo_sleep(philo);
 		if (philo->data->end || all_eaten(philo->data))
-			return;
+			return ;
 		pthread_mutex_lock(&philo->data->print_mutex);
 		printf("%lld %d  %s\n", get_time() - philo->data->start_time,
 			philo->philo_id + 1, THINK);
@@ -67,9 +67,9 @@ void	*philo_line(void *arg)
 
 	philo = (t_philo *)arg;
 	if (philo->philo_id % 2 == 1)
-		ft_usleep(1);
+		usleep(30);
 	philo_life(philo);
-	return(NULL);
+	return (NULL);
 }
 
 static int	ft_init(int argc, char *argv[], t_data *data)
@@ -109,7 +109,7 @@ int	main(int argc, char *argv[])
 	data = malloc(sizeof(t_data));
 	if (!data)
 	{
-		printf("Error");
+		printf("Error\n");
 		return (1);
 	}
 	if (ft_init(argc, argv, data))

@@ -6,11 +6,32 @@
 /*   By: yant <yant@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 01:30:01 by yant              #+#    #+#             */
-/*   Updated: 2025/05/05 12:40:10 by yant             ###   ########.fr       */
+/*   Updated: 2025/05/10 03:17:16 by yant             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	check_digit(int i, int j, int argc, char **argv)
+{
+	while (i < argc)
+	{
+		j = 0;
+		while (argv[i][j])
+		{
+			if ((argv[i][j] == '-' || argv[i][j] == '+') && j == 0)
+			{
+				j++;
+				continue ;
+			}
+			if (argv[i][j] < '0' || argv[i][j] > '9')
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
 
 int	ft_atoi(char *str)
 {
@@ -25,15 +46,13 @@ int	ft_atoi(char *str)
 		i++;
 	if (str[i] == '-')
 	{
-		sign = sign * -1;
+		sign *= -1;
 		i++;
 	}
 	else if (str[i] == '+')
 		i++;
 	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if (!(str[i] >= '0' && str[i] <= '9'))
-			return (0);
 		result = result * 10 + (str[i] - '0');
 		i++;
 	}
@@ -53,10 +72,9 @@ void	take_values(int argc, char **argv, t_data *data)
 
 int	control_values(int argc, char **argv)
 {
-	int	i;
-
-	i = 0;
 	if (argc < 5 || argc > 6)
+		return (1);
+	if (check_digit(1, 0, argc, argv))
 		return (1);
 	if (argc == 6 && ft_atoi(argv[5]) <= 0)
 		return (1);

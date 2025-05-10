@@ -1,7 +1,7 @@
 
 CC = cc
 NAME = philo
-SRC = main.c utils.c utils_two.c check.c simulator.c
+SRC = main.c utils.c utils_two.c check.c simulator.c ft_clean.c
 OBJ = $(SRC:.c=.o)
 #-fsanitize=thread
 all: $(NAME)
@@ -18,4 +18,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re 
-#kontrol kısımda 200a çalışıyor buna dikkat!
