@@ -6,7 +6,7 @@
 /*   By: yant <yant@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 01:30:16 by yant              #+#    #+#             */
-/*   Updated: 2025/05/10 04:17:53 by yant             ###   ########.fr       */
+/*   Updated: 2025/05/10 15:39:59 by yant             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,14 @@ void	set_values(t_data *data)
 
 void	philo_sleep(t_philo *philo)
 {
-	if (philo->data->end || all_eaten(philo->data))
+	pthread_mutex_lock(&philo->data->end_mutex);
+	if (philo->data->end)
+	{
+		pthread_mutex_unlock(&philo->data->end_mutex);
 		return ;
+	}
+	pthread_mutex_unlock(&philo->data->end_mutex);
+		
 	pthread_mutex_lock(&philo->data->print_mutex);
 	printf("%lld %d %s\n", get_time() - philo->data->start_time,
 		philo->philo_id + 1, SLEEP);

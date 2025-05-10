@@ -6,7 +6,7 @@
 /*   By: yant <yant@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 01:30:11 by yant              #+#    #+#             */
-/*   Updated: 2025/05/10 04:22:17 by yant             ###   ########.fr       */
+/*   Updated: 2025/05/10 15:05:23 by yant             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	clear_malloc(t_data *data)
 		free(data->philo);
 	if (data->forks)
 		free(data->forks);
-		pthread_mutex_destroy(&data->print_mutex);
 	if (data)
 		free(data);
 }

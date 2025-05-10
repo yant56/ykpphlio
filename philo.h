@@ -6,7 +6,7 @@
 /*   By: yant <yant@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 01:30:11 by yant              #+#    #+#             */
-/*   Updated: 2025/05/10 04:17:05 by yant             ###   ########.fr       */
+/*   Updated: 2025/05/10 14:39:43 by yant             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ typedef struct s_data
 	int				end;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	end_mutex;
+	pthread_mutex_t	eaten_mutex;
+	pthread_mutex_t	meal_mutex;
 	t_philo			*philo;
 }	t_data;
 
