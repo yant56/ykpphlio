@@ -6,7 +6,7 @@
 /*   By: yant <yant@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 01:30:20 by yant              #+#    #+#             */
-/*   Updated: 2025/05/10 04:18:05 by yant             ###   ########.fr       */
+/*   Updated: 2025/05/18 00:06:43 by yant             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	ft_create_threads(t_data *data)
 	int	i;
 
 	i = 0;
+	data->start_flag = 0;
 	while (i < data->count_philo)
 	{
 		if (pthread_create(&data->philo[i].thread,
@@ -82,6 +83,6 @@ void	ft_usleep(long long time)
 	long long	start;
 
 	start = get_time() + time;
-	while (get_time() <= start)
-		usleep(500);
+	while (get_time() < start)
+		usleep(100);
 }

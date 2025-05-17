@@ -6,7 +6,7 @@
 /*   By: yant <yant@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 01:30:14 by yant              #+#    #+#             */
-/*   Updated: 2025/05/10 15:36:42 by yant             ###   ########.fr       */
+/*   Updated: 2025/05/18 00:47:20 by yant             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 static void	ft_eat(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->print_mutex);
-	printf("%lld %d %s\n", get_time() - philo->data->start_time,
-		philo->philo_id + 1, EAT);
+	prinf_philo(1,philo->data);
 	pthread_mutex_unlock(&philo->data->print_mutex);
 	
 	pthread_mutex_lock(&philo->data->meal_mutex);
@@ -45,8 +44,7 @@ static int	ft_left_fork(int right_fork, int left_fork, t_philo *philo)
 	}
 	
 	pthread_mutex_lock(&philo->data->print_mutex);
-	printf("%lld %d %s\n", get_time() - philo->data->start_time,
-		philo->philo_id + 1, FORK);
+	prinf_philo(2,philo->data);
 	pthread_mutex_unlock(&philo->data->print_mutex);
 	
 	pthread_mutex_lock(&philo->data->forks[right_fork]);
@@ -64,8 +62,7 @@ static int	ft_left_fork(int right_fork, int left_fork, t_philo *philo)
 	}
 	
 	pthread_mutex_lock(&philo->data->print_mutex);
-	printf("%lld %d %s\n", get_time() - philo->data->start_time,
-		philo->philo_id + 1, FORK);
+	prinf_philo(2,philo->data);
 	pthread_mutex_unlock(&philo->data->print_mutex);
 	
 	return (0);
@@ -80,8 +77,7 @@ static int	ft_right_fork(int right_fork, int left_fork, t_philo *philo)
 		return (1);
 	}
 	pthread_mutex_lock(&philo->data->print_mutex);
-	printf("%lld %d %s\n", get_time() - philo->data->start_time,
-		philo->philo_id + 1, FORK);
+	prinf_philo(2,philo->data);
 	pthread_mutex_unlock(&philo->data->print_mutex);
 	pthread_mutex_lock(&philo->data->forks[left_fork]);
 	if (philo->data->end)
@@ -91,8 +87,7 @@ static int	ft_right_fork(int right_fork, int left_fork, t_philo *philo)
 		return (1);
 	}
 	pthread_mutex_lock(&philo->data->print_mutex);
-	printf("%lld %d %s\n", get_time() - philo->data->start_time,
-		philo->philo_id + 1, FORK);
+	prinf_philo(2,philo->data);
 	pthread_mutex_unlock(&philo->data->print_mutex);
 	return (0);
 }
@@ -128,14 +123,14 @@ int	p_simulator(t_data *data)
 
 	pthread_t	t1;
 
-	data->start_time = get_time();
+	// data->start_time = get_time();
+	if (ft_create_threads(data))
+		return (1);
 	if (pthread_create(&t1, NULL, philo_check, data))
 	{
 		printf("Error\n");
 		return (1);
 	}
-	if (ft_create_threads(data))
-		return (1);
 	if (ft_join_threads(data))
 		return (1);
 	if (pthread_join(t1, NULL))

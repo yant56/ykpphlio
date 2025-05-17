@@ -6,7 +6,7 @@
 /*   By: yant <yant@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 01:30:11 by yant              #+#    #+#             */
-/*   Updated: 2025/05/10 14:39:43 by yant             ###   ########.fr       */
+/*   Updated: 2025/05/18 00:36:15 by yant             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_data
 	int				time_to_sleep;
 	int				times_must_eat;
 	int				end;
+	int				start_flag;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	end_mutex;
@@ -65,5 +66,6 @@ void		take_values(int argc, char **argv, t_data *data);
 void		*philo_line(void *arg);
 void		*philo_check(void *arg);
 void		ft_usleep(long long time);
+void prinf_philo(int i,t_data *data);
 
 #endif

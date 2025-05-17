@@ -6,7 +6,7 @@
 /*   By: yant <yant@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 01:30:16 by yant              #+#    #+#             */
-/*   Updated: 2025/05/10 15:39:59 by yant             ###   ########.fr       */
+/*   Updated: 2025/05/18 01:16:05 by yant             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,14 @@ void	philo_sleep(t_philo *philo)
 	pthread_mutex_unlock(&philo->data->end_mutex);
 		
 	pthread_mutex_lock(&philo->data->print_mutex);
-	printf("%lld %d %s\n", get_time() - philo->data->start_time,
-		philo->philo_id + 1, SLEEP);
+	prinf_philo(5,philo->data);
 	pthread_mutex_unlock(&philo->data->print_mutex);
 	ft_usleep(philo->data->time_to_sleep);
 }
 
 void	one_philo(t_data *data)
 {
-	printf("%lld %d %s\n", get_time() - data->start_time, 1, FORK);
+	printf("%lld %d %s\n", get_time() - data->start_time, 1, FORK);// burayı thread ile çalıştır.
 	ft_usleep(data->time_to_die);
 	printf("%lld %d %s\n", get_time() - data->start_time, 1, DIE);
 	clear_malloc(data);

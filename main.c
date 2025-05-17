@@ -6,7 +6,7 @@
 /*   By: yant <yant@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 01:30:07 by yant              #+#    #+#             */
-/*   Updated: 2025/05/10 16:13:21 by yant             ###   ########.fr       */
+/*   Updated: 2025/05/18 01:00:47 by yant             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,39 @@
 #include <unistd.h>
 #include "philo.h"
 
+
+
+void prinf_philo(int i,t_data *data)
+{
+	// 1 ise yemek , 2 çatal , 3 düşünme , 4 ölme, 5 uyuma
+	if(data->end)
+		return;	
+	else if(i == 1)
+	printf("%lld %d %s\n", get_time() - data->start_time,
+	data->philo->philo_id + 1, EAT);
+	else if(i == 2)
+	printf("%lld %d %s\n", get_time() - data->start_time,
+	data->philo->philo_id + 1, FORK);
+	else if(i == 3)
+	printf("%lld %d  %s\n", get_time() - data->start_time,
+	data->philo->philo_id + 1, THINK);
+	else if(i == 4)
+	printf("%lld %d  %s\n", get_time() - data->start_time,
+	data->philo->philo_id + 1, DIE);
+	else if(i == 5)
+	printf("%lld %d  %s\n", get_time() - data->start_time,
+	data->philo->philo_id + 1, SLEEP);
+		
+}
+
+void make_end(t_data	*data)
+{
+	pthread_mutex_lock(&data->end_mutex);
+	data->end = 1;
+	pthread_mutex_unlock(&data->end_mutex);
+}
+
+
 void	*philo_check(void *arg)
 {
 	t_data	*data;
@@ -22,6 +55,8 @@ void	*philo_check(void *arg)
 	int		all_ate;
 	
 	data = (t_data *)arg;
+	data->start_flag = 1;
+	data->start_time = get_time();
 	while (1)
 	{
 		i = -1;
@@ -33,10 +68,7 @@ void	*philo_check(void *arg)
 			{
 				pthread_mutex_unlock(&data->meal_mutex);
 				someone_died(data, i);
-				pthread_mutex_lock(&data->end_mutex);
-				data->end = 1;
-				pthread_mutex_unlock(&data->end_mutex);
-				return (NULL);
+				return (make_end(data),NULL);
 			}
 			
 			// all_eaten kontrolünü de mutex içinde yapın
@@ -44,16 +76,20 @@ void	*philo_check(void *arg)
 			pthread_mutex_unlock(&data->meal_mutex);
 			
 			if (all_ate)
-			{
-				pthread_mutex_lock(&data->end_mutex);
-				data->end = 1;
-				pthread_mutex_unlock(&data->end_mutex);
-				return (NULL);
-			}
+				return (make_end(data),NULL);
 		}
-		ft_usleep(50);
+		ft_usleep(1);
 	}
 	return (NULL);
+}
+
+void	think(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->print_mutex);
+	prinf_philo(3,philo->data);
+    pthread_mutex_unlock(&philo->data->print_mutex);
+	if (philo->data->time_to_die - (philo->data->time_to_eat + philo->data->time_to_sleep))
+		ft_usleep((philo->data->time_to_die - philo->data->time_to_eat - philo->data->time_to_sleep) / 2);
 }
 
 static void	philo_life(t_philo *philo)
@@ -62,7 +98,7 @@ static void	philo_life(t_philo *philo)
     {
         // Yemek sayısını kontrol etmek için meal_mutex kullan
         pthread_mutex_lock(&philo->data->meal_mutex);
-        int has_eaten_enough = (philo->data->times_must_eat != -1 && 
+        int has_eaten_enough = (philo->data->times_must_eat != -1 &&
                               philo->count_eaten >= philo->data->times_must_eat);
         pthread_mutex_unlock(&philo->data->meal_mutex);
         
@@ -77,7 +113,6 @@ static void	philo_life(t_philo *philo)
             return;
         }
         pthread_mutex_unlock(&philo->data->end_mutex);
-            
         take_forks_end_eat(philo);
         philo_sleep(philo);
         
@@ -89,10 +124,8 @@ static void	philo_life(t_philo *philo)
         }
         pthread_mutex_unlock(&philo->data->end_mutex);
         
-        pthread_mutex_lock(&philo->data->print_mutex);
-        printf("%lld %d  %s\n", get_time() - philo->data->start_time,
-            philo->philo_id + 1, THINK);
-        pthread_mutex_unlock(&philo->data->print_mutex);
+		think(philo);
+		
     }
 }
 
@@ -101,8 +134,11 @@ void	*philo_line(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	while (philo->data->start_flag != 1)
+		;
+	philo->last_meal_time = get_time();
 	if (philo->philo_id % 2 == 1)
-		usleep(30);
+		ft_usleep(1);
 	philo_life(philo);
 	return (NULL);
 }
@@ -129,7 +165,7 @@ static int	ft_init(int argc, char *argv[], t_data *data)
 	pthread_mutex_init(&data->meal_mutex, NULL);
 	if (ft_atoi(argv[1]) == 1)
 	{
-		one_philo(data);
+		one_philo(data); //thread başlat
 		return (1);
 	}
 	return (0);
